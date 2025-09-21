@@ -72,19 +72,60 @@ include 'admin_header.php';
                 </div>
                 <div class="col-md-6">
                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                        <ul class="pagination">
-                            <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-                                <a class="page-link" href="<?php if($page <= 1){ echo '#'; } else { echo "?page=".($page - 1); } ?>" aria-label="Previous"><span aria-hidden="true">«</span></a>
-                            </li>
-                            <?php for($i = 1; $i <= $total_pages; $i++ ): ?>
-                            <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                            </li>
-                            <?php endfor; ?>
-                            <li class="page-item <?php if($page >= $total_pages) { echo 'disabled'; } ?>">
-                                <a class="page-link" href="<?php if($page >= $total_pages){ echo '#'; } else {echo "?page=".($page + 1); } ?>" aria-label="Next"><span aria-hidden="true">»</span></a>
-                            </li>
-                        </ul>
+                        <?php
+                        function generate_pagination_html($page, $total_pages) {
+                            $html = '<ul class="pagination">';
+
+                            // Previous button
+                            $prev_class = ($page <= 1) ? 'disabled' : '';
+                            $html .= '<li class="page-item ' . $prev_class . '"><a class="page-link" href="?page=' . ($page - 1) . '">Previous</a></li>';
+
+                            // Page numbers logic
+                            $window = 2; // Number of links to show around the current page
+                            if ($total_pages <= (2 * $window + 5)) {
+                                // Show all pages if total is small
+                                for ($i = 1; $i <= $total_pages; $i++) {
+                                    $active_class = ($i == $page) ? 'active' : '';
+                                    $html .= '<li class="page-item ' . $active_class . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                }
+                            } else {
+                                // Show first page
+                                $html .= '<li class="page-item ' . ($page == 1 ? 'active' : '') . '"><a class="page-link" href="?page=1">1</a></li>';
+
+                                // Ellipsis after first page
+                                if ($page > $window + 2) {
+                                    $html .= '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                }
+
+                                // Window of pages
+                                $start = max(2, $page - $window);
+                                $end = min($total_pages - 1, $page + $window);
+                                for ($i = $start; $i <= $end; $i++) {
+                                    $active_class = ($i == $page) ? 'active' : '';
+                                    $html .= '<li class="page-item ' . $active_class . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                }
+
+                                // Ellipsis before last page
+                                if ($page < $total_pages - $window - 1) {
+                                    $html .= '<li class="page-item disabled"><span class="page-link">...</span></li>';
+                                }
+
+                                // Show last page
+                                $html .= '<li class="page-item ' . ($page == $total_pages ? 'active' : '') . '"><a class="page-link" href="?page=' . $total_pages . '">' . $total_pages . '</a></li>';
+                            }
+
+                            // Next button
+                            $next_class = ($page >= $total_pages) ? 'disabled' : '';
+                            $html .= '<li class="page-item ' . $next_class . '"><a class="page-link" href="?page=' . ($page + 1) . '">Next</a></li>';
+
+                            $html .= '</ul>';
+                            return $html;
+                        }
+
+                        if ($total_pages > 1) {
+                            echo generate_pagination_html($page, $total_pages);
+                        }
+                        ?>
                     </nav>
                 </div>
             </div>

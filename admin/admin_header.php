@@ -12,37 +12,25 @@
     <link rel="stylesheet" href="admin_style.css">
 </head>
 <body>
-    <div class="wrapper">
-        <!-- Sidebar -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <h3>Admin Panel</h3>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-light">CineCraze Admin</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="dashboard.php">Dashboard</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="manage_entries.php">Manage Entries</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="manage_categories.php">Manage Categories</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="bulk_import_tmdb.php">Bulk Import</a>
+                <a class="list-group-item list-group-item-action list-group-item-danger p-3" href="logout.php">Logout</a>
             </div>
-            <ul class="list-unstyled components">
-                <p>CineCraze</p>
-                <li class="active">
-                    <a href="dashboard.php">Dashboard</a>
-                </li>
-                <li>
-                    <a href="manage_entries.php">Manage Entries</a>
-                </li>
-                <li>
-                    <a href="manage_categories.php">Manage Categories</a>
-                </li>
-                <li>
-                    <a href="bulk_import_tmdb.php">Bulk Import</a>
-                </li>
-            </ul>
-            <ul class="list-unstyled CTAs">
-                <li><a href="logout.php" class="logout btn-danger">Logout</a></li>
-            </ul>
-        </nav>
-        <!-- Page Content -->
-        <div class="content">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-bars"></i>
-                    </button>
+                    <button class="btn btn-outline-secondary" id="menu-toggle"><i class="fas fa-bars"></i></button>
                 </div>
             </nav>
+            <!-- Page content-->
+            <div class="container-fluid">
