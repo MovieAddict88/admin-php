@@ -1,2 +1,1 @@
-# admin-php
-Repository with auto-unzip workflow
+# CineMax-PHP
