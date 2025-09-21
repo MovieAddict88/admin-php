@@ -8,9 +8,10 @@
 
     <script>
         $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
+            $('#sidebarCollapse, .overlay').on('click', function () {
                 $('.sidebar').toggleClass('active');
                 $('.content').toggleClass('active');
+                $('.overlay').toggleClass('active');
             });
         });
     </script>
