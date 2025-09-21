@@ -25,6 +25,41 @@ body {
     margin-left: -250px;
 }
 
+@media (max-width: 768px) {
+    .sidebar {
+        margin-left: -250px;
+        z-index: 1000;
+    }
+    .sidebar.active {
+        margin-left: 0;
+    }
+    .content {
+        width: 100%;
+        margin-left: 0;
+    }
+    .content.active {
+        /* No change needed when sidebar is active on mobile */
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .page-item {
+        margin: 2px;
+    }
+    .page-link {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-item:not(:first-child):not(:last-child) {
+        display: none;
+    }
+}
+
 .sidebar-header {
     padding: 20px;
     background-color: #1a242f;
